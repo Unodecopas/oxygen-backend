@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>ENDPOINTS:</h1>
+    <ul>
+      <li>
+        USER
+        <ul>
+          <li>POST /login: return token</li>
+        </ul>
+      </li>
+      <li>
+        ROOMS (required LOGIN)
+        <ul>
+          <li>GET /rooms: return all rooms</li>
+          <li>POST /rooms: create a new room</li>
+          <li>GET /rooms/:id : receive a booking</li>
+          <li>PATCH /rooms/:id - update a room</li>
+        </ul>
+      </li>
+      <li>
+        BOOKINGS (required LOGIN)
+        <ul>
+          <li>GET /bookings: return all bookings</li>
+          <li>POST /bookings: create a new booking</li>
+          <li>GET /booking/:id - receive a booking</li>
+          <li>PATCH /booking/:id - update a booking</li>
+        </ul>
+      </li>
+      <li>
+        REVIEWS (required LOGIN)
+        <ul>
+          <li>GET /reviews: return all review</li>
+          <li>POST /reviews: create a new review</li>
+          <li>GET /reviews/:id - receive a review</li>
+          <li>PATCH /reviews/:id - update a review</li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

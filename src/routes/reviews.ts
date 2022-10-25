@@ -3,8 +3,8 @@ import { getReviews, getReview, updateReview, createReview } from '../controller
 const router = express.Router()
 
 router.get('/', getReviews)
-router.get('/:id', getReview)
 router.post('/', createReview)
+router.get('/:id', getReview)
 router.patch('/:id', updateReview)
 
 export default router

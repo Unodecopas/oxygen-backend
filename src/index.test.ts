@@ -1,5 +1,6 @@
 import request, { Response } from 'supertest'
 import app from './app'
+import 'dotenv/config'
 
 describe('Rooms Endpoints', () => {
   it('GET ROOMS: should return all rooms', async () => {
@@ -127,7 +128,7 @@ describe('Bookings Endpoints', () => {
   })
 })
 
-describe.only('Reviews Endpoints', () => {
+describe('Reviews Endpoints', () => {
   it('GET REVIEWS: should return all reviews', async () => {
     const res: Response = await request(app)
       .get('/reviews')
@@ -185,5 +186,29 @@ describe.only('Reviews Endpoints', () => {
       .expect('Content-Type', /json/)
 
     expect(res.body).toHaveProperty('customer', 'Fake Customer')
+  })
+})
+
+describe.only('Users Endpoints', () => {
+  it('POST LOGIN (wrong username or password): should return a error', async () => {
+    const newUser = { username: 'fake', password: 'fake' }
+    const res: Response = await request(app)
+      .post('/users/login')
+      .send(newUser)
+      .expect(401)
+      .expect('Content-Type', /json/)
+
+    expect(res.body).toHaveProperty('message', 'Wrong username or password')
+  })
+  it('POST LOGIN (correct username and password): should return a token', async () => {
+    process.env.JWTSECRETWORD = 'secret'
+    const newUser = { username: 'Jesus', password: 'admin' }
+    const res: Response = await request(app)
+      .post('/users/login')
+      .send(newUser)
+      .expect(200)
+      .expect('Content-Type', /json/)
+
+    expect(res.body).toHaveProperty('token')
   })
 })

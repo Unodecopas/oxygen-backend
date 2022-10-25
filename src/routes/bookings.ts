@@ -3,8 +3,8 @@ import { getBooking, getBookings, createBooking, updateBooking } from '../contro
 const router = express.Router()
 
 router.get('/', getBookings)
-router.get('/:id', getBooking)
 router.post('/', createBooking)
+router.get('/:id', getBooking)
 router.patch('/:id', updateBooking)
 
 export default router

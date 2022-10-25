@@ -3,8 +3,8 @@ import { getRooms, getRoom, createRoom, updateRoom } from '../controllers/roomsC
 const router = express.Router()
 
 router.get('/', getRooms)
-router.get('/:id', getRoom)
 router.post('/', createRoom)
+router.get('/:id', getRoom)
 router.patch('/:id', updateRoom)
 
 export default router
