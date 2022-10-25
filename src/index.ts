@@ -1,7 +1,8 @@
-import 'dotenv/config'
-import app from './app'
 
-const PORT = 4000
+import app from './app'
+import 'dotenv/config'
+
+const PORT = !isNaN(process.env.PORT) ? process.env.PORT : 4000
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`)

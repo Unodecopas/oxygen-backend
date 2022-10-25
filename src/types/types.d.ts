@@ -1,4 +1,4 @@
-import { BookingStatus, ReviewStatus } from './enums'
+import { BookingStatus, ReviewStatus } from '../enums'
 
 export interface Review {
   id: number

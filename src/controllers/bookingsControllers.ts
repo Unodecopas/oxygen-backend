@@ -1,5 +1,5 @@
 import bookingsData from '../data/bookings.json'
-import { Booking, NewBooking } from '../types'
+import { Booking, NewBooking } from '../types/types'
 
 const bookings: Booking[] = bookingsData as Booking[]
 

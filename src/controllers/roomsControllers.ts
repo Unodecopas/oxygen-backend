@@ -1,5 +1,5 @@
 import roomsData from '../data/rooms.json'
-import { NewRoom, Room } from '../types'
+import { NewRoom, Room } from '../types/types'
 
 const rooms: Room[] = roomsData as Room[]
 

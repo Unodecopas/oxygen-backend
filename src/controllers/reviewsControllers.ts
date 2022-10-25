@@ -1,5 +1,5 @@
 import reviewsData from '../data/reviews.json'
-import { NewReview, Review } from '../types'
+import { NewReview, Review } from '../types/types'
 
 const reviews: Review[] = reviewsData as Review[]
 
