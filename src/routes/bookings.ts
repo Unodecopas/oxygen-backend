@@ -1,10 +1,23 @@
 import express from 'express'
-import { getBooking, getBookings, createBooking, updateBooking } from '../controllers/bookingsControllers'
+import * as bookingsControllers from '../controllers/bookingsControllers'
 const router = express.Router()
 
-router.get('/', getBookings)
-router.post('/', createBooking)
-router.get('/:id', getBooking)
-router.patch('/:id', updateBooking)
+router.get('/', (_, res) => {
+  const bookings = bookingsControllers.getBookings()
+  res.send(bookings)
+})
+router.post('/', (req, res) => {
+  const newBooking = bookingsControllers.createBooking(req.body)
+  res.send(newBooking)
+})
+router.get('/:id', (req, res, next) => {
+  const booking = bookingsControllers.getBooking(Number(req.params.id))
+  if (booking === undefined) next()
+  res.send(booking)
+})
+router.patch('/:id', (req, res) => {
+  const updatedBooking = bookingsControllers.updateBooking(req.body)
+  res.send(updatedBooking)
+})
 
 export default router

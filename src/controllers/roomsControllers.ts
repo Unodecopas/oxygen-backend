@@ -1,18 +1,16 @@
 import roomsData from '../data/rooms.json'
+import { NewRoom, Room } from '../types'
 
-const getRooms = (_req, res) => {
-  res.send(roomsData)
+const rooms: Room[] = roomsData as Room[]
+
+export const getRooms = (): Room[] => rooms
+
+export const getRoom = (id: number): Room | undefined => {
+  const room = rooms.find(room => room.id === id)
+  return room
 }
-const getRoom = (req, res) => {
-  const [room] = roomsData.filter(room => room.id === Number(req.params.id))
-  if (!room) return res.status(404).json({ message: 'Not Found' })
-  res.send(room)
-}
-const createRoom = (req, res) => {
+export const createRoom = (object: NewRoom): Room => {
   const id = Math.max(...roomsData.map(room => room.id)) + 1
-  res.send({ id, ...req.body })
+  return ({ id, ...object })
 }
-const updateRoom = (req, res) => {
-  res.send({ id: req.params.id, ...req.body })
-}
-export { getRooms, getRoom, createRoom, updateRoom }
+export const updateRoom = (object: Room): Room => object

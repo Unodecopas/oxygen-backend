@@ -22,15 +22,7 @@ app.get('/', express.static('public'))
 app.use((_req, res) => {
   res.status(404).send({
     status: 'error',
-    message: 'Not found'
-  })
-})
-
-// middleware errors
-app.use((error, _req, res, _next) => {
-  res.status(error.httpStatus || 500).send({
-    status: 'error',
-    message: error.message
+    message: 'Not Found'
   })
 })
 

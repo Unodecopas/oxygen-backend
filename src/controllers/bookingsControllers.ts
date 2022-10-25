@@ -1,22 +1,18 @@
 import bookingsData from '../data/bookings.json'
+import { Booking, NewBooking } from '../types'
 
-const getBookings = (_, res) => {
-  res.send(bookingsData)
+const bookings: Booking[] = bookingsData as Booking[]
+
+export const getBookings = (): Booking[] => bookings
+
+export const getBooking = (id: number): Booking | undefined => {
+  const bookingEntry = bookings.find(booking => booking.id === id)
+  return bookingEntry
 }
 
-const getBooking = (req, res) => {
-  const [booking] = bookingsData.filter(booking => booking.id === Number(req.params.id))
-  if (!booking) return res.status(404).json({ message: 'Not Found' })
-  res.send(booking)
+export const createBooking = (object: NewBooking): Booking => {
+  const id = Math.max(...bookings.map(booking => booking.id)) + 1
+  return ({ id, ...object })
 }
 
-const createBooking = (req, res) => {
-  const id = Math.max(...bookingsData.map(booking => booking.id)) + 1
-  res.send({ id, ...req.body })
-}
-
-const updateBooking = (req, res) => {
-  res.send({ id: req.params.id, ...req.body })
-}
-
-export { getBooking, getBookings, createBooking, updateBooking }
+export const updateBooking = (object: Booking): Booking => object

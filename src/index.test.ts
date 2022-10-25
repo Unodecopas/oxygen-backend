@@ -189,7 +189,7 @@ describe('Reviews Endpoints', () => {
   })
 })
 
-describe.only('Users Endpoints', () => {
+describe('Users Endpoints', () => {
   it('POST LOGIN (wrong username or password): should return a error', async () => {
     const newUser = { username: 'fake', password: 'fake' }
     const res: Response = await request(app)

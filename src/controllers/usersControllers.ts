@@ -1,12 +1,9 @@
 import jwt from 'jsonwebtoken'
+import 'dotenv/config'
 
-const login = (req, res) => {
-  const { username, password } = req.body
-  if (username !== 'Jesus' || password !== 'admin') return res.status(401).json({ message: 'Wrong username or password' })
-  const tokenInfo = { username }
-  const token = jwt.sign(tokenInfo, process.env.JWTSECRETWORD, { expiresIn: '30d' })
+export const login = (username: string, password: string): string | undefined => {
+  if (username !== 'Jesus' || password !== 'admin') return undefined
+  const token = jwt.sign(username, process.env.JWTSECRETWORD as string)
 
-  res.send({ token })
+  return token
 }
-
-export { login }
