@@ -16,7 +16,7 @@ router.get('/:id', (req, res, next) => {
   res.send(booking)
 })
 router.patch('/:id', (req, res) => {
-  const updatedBooking = bookingsControllers.updateBooking(req.body)
+  const updatedBooking = bookingsControllers.updateBooking(req.body, Number(req.params.id))
   res.send(updatedBooking)
 })
 

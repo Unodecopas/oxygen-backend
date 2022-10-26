@@ -15,4 +15,8 @@ export const createBooking = (object: NewBooking): Booking => {
   return ({ id, ...object })
 }
 
-export const updateBooking = (object: Booking): Booking => object
+export const updateBooking = (object: NewBooking, id: number): Booking | undefined => {
+  const bookingEntry = bookings.find(booking => booking.id === id)
+  if (bookingEntry === undefined) return undefined
+  return { id, ...object }
+}

@@ -15,8 +15,9 @@ router.get('/:id', (req, res, next) => {
   if (room === undefined) next()
   res.send(room)
 })
-router.patch('/:id', (req, res) => {
-  const updatedRoom = roomsControllers.updateRoom(req.body)
+router.patch('/:id', (req, res, next) => {
+  const updatedRoom = roomsControllers.updateRoom(req.body, Number(req.params.id))
+  if (updatedRoom === undefined) next()
   res.send(updatedRoom)
 })
 

@@ -16,8 +16,9 @@ router.get('/:id', (req, res, next) => {
   if (review === undefined) next()
   res.send(review)
 })
-router.patch('/:id', (req, res) => {
-  const updateReview = reviewsControllers.updateReview(req.body)
+router.patch('/:id', (req, res, next) => {
+  const updateReview = reviewsControllers.updateReview(req.body, Number(req.params.id))
+  if (updateReview === undefined) next()
   res.send(updateReview)
 })
 

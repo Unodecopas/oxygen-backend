@@ -15,4 +15,8 @@ export const createReview = (object: NewReview): Review => {
   return ({ id, ...object })
 }
 
-export const updateReview = (object: Review): Review => object
+export const updateReview = (object: NewReview, id: number): Review | undefined => {
+  const reviewToUpdated = reviews.find(review => review.id === id)
+  if (reviewToUpdated === undefined) return undefined
+  return { id, ...object }
+}
