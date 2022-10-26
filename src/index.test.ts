@@ -212,3 +212,20 @@ describe('Users Endpoints', () => {
     expect(res.body).toHaveProperty('token')
   })
 })
+
+describe('Private Endpoint', () => {
+  it('PRIVATE Endpoint (without token): sould be return an error', async () => {
+    await request(app)
+      .get('/private')
+      .expect(401)
+  })
+  it('PRIVATE Endpoint (with token): sould be return ok', async () => {
+    const res: Response = await request(app)
+      .get('/private')
+      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.SmVzdXM.zLGQQfgMC6z2-KvfZbe0CJksKS3tBrtwYSi5V5Q39a8')
+      .expect(200)
+      .expect('Content-Type', /json/)
+
+    expect(res.body).toHaveProperty('message', 'ok')
+  })
+})
