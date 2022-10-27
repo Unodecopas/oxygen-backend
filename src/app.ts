@@ -33,4 +33,11 @@ app.use((_req, res) => {
   })
 })
 
+app.use((error: any, _req: any, res: any, _next: any) => {
+  res.status((error.httpStatus !== undefined) ? error.httpStatus : 500).send({
+    status: 'error',
+    message: error.message
+  })
+})
+
 export default app
