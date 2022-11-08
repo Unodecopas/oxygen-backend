@@ -3,7 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import roomsRoutes from './routes/rooms'
 import bookingsRoutes from './routes/bookings'
-import reviewsRoutes from './routes/reviews'
+import contactsRoutes from './routes/contacts'
 import usersRoutes from './routes/users'
 import passport from 'passport'
 import isAuth from './middlewares/isAuth'
@@ -17,7 +17,7 @@ passport.use(isAuth)
 
 app.use('/rooms', roomsRoutes)
 app.use('/bookings', bookingsRoutes)
-app.use('/reviews', reviewsRoutes)
+app.use('/contacts', contactsRoutes)
 app.use('/users', usersRoutes)
 
 app.get('/', express.static('public'))

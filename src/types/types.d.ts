@@ -1,6 +1,6 @@
-import { BookingStatus, ReviewStatus, UserStatus } from '../enums'
+import { BookingStatus, ContactStatus, UserStatus } from '../enums'
 
-export interface Review {
+export interface Contact {
   id: number
   date: string
   customer: string
@@ -8,10 +8,10 @@ export interface Review {
   phone: string
   comment: string
   subject: string
-  status: ReviewStatus
+  status: ContactStatus
 }
 
-export type NewReview = Omit<Review, 'id'>
+export type NewContact = Omit<Contact, 'id'>
 
 export interface Booking {
   id: number

@@ -1,4 +1,4 @@
-export enum ReviewStatus {
+export enum ContactStatus {
   Unread = 'unread',
   Published = 'published',
   Archived = 'archived'

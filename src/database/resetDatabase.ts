@@ -24,7 +24,7 @@ const createTables = (): void => {
       phone varchar(20) not null,
       comment varchar(255) not null,
       subject varchar(255) not null,
-      status ENUM('published', 'unread') default 'unread'
+      status ENUM('published', 'unread') not null
     )
   `)
   connection.query(`
