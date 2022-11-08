@@ -1,4 +1,4 @@
-import { BookingStatus, ReviewStatus } from '../enums'
+import { BookingStatus, ReviewStatus, UserStatus } from '../enums'
 
 export interface Review {
   id: number
@@ -38,3 +38,14 @@ export interface Room {
   amenities: string[]
 }
 export type NewRoom = Omit<Room, 'id'>
+
+export interface User {
+  id: number
+  username: string
+  photo: string
+  email: string
+  startDate: string
+  job: string
+  contact: string
+  status: UserStatus
+}

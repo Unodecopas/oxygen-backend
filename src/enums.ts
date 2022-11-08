@@ -9,3 +9,7 @@ export enum BookingStatus {
   Checkout = 'checkout',
   InProgress = 'inprogress'
 }
+export enum UserStatus {
+  Inactive = 'inactive',
+  Active = 'active'
+}
