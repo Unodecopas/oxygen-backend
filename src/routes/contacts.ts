@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express'
-import reviesData from '../data/reviews.json'
-import { Contact } from '../types/types'
-import { getContact, getContacts, addContact } from '../controllers/contactControllers'
+import { getContact, getContacts, addContact, updateContact } from '../controllers/contactControllers'
 import { dbQuery } from '../database/dbconfig'
 import generateError from '../utils/generateError'
+import { contactSchema } from '../schemas/schemas'
 
 const router = express.Router()
-
-const reviewsList: Contact[] = reviesData as Contact[]
 
 router.get('/', async (_, res, next): Promise<void> => {
   try {
@@ -21,6 +18,7 @@ router.get('/', async (_, res, next): Promise<void> => {
 
 router.post('/', async (req, res, next): Promise<void> => {
   try {
+    await contactSchema.validateAsync(req.body)
     const response = await addContact(req.body)
 
     if (response !== null) {
@@ -42,13 +40,18 @@ router.get('/:id', async (req, res, next): Promise<void> => {
   }
 })
 
-router.patch('/:id', (req, res, next) => {
-  const index = reviewsList.findIndex(review => review.id === Number(req.params.id))
-  if (index === -1) {
-    next()
-  } else {
-    reviewsList[index] = { id: reviewsList[index].id, ...req.body }
-    res.send(reviewsList[index])
+router.patch('/:id', async (req, res, next) => {
+  try {
+    await contactSchema.validateAsync(req.body)
+    const contact = await getContact(Number(req.params.id))
+    if (contact.length === 0) next()
+    const response = await updateContact(req.body, Number(req.params.id))
+    if (response !== null) {
+      const [updatedContact] = await getContact(Number(req.params.id))
+      res.send(updatedContact)
+    }
+  } catch (error) {
+    next(error)
   }
 })
 

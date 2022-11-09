@@ -24,15 +24,15 @@ describe('Bookings Endpoints', () => {
       .expect('Content-Type', /json/)
     expect(res.body).toHaveProperty('message', 'Not Found')
   })
-  it('CREATE BOOKING : should return the booking with id 51', async () => {
+  it('CREATE BOOKING : should return the booking with id', async () => {
     const newBooking = {
       guestName: 'string',
-      orderDate: 'string',
-      checkin: 'string',
-      checkout: 'string',
+      orderDate: '2022-03-11',
+      checkin: '2022-03-12',
+      checkout: '2022-03-15',
       request: 'string',
-      roomType: 'string',
-      status: 'BookingStatus'
+      roomID: 1,
+      status: 'inprogress'
     }
     const res: Response = await request(app)
       .post('/bookings')
@@ -40,17 +40,17 @@ describe('Bookings Endpoints', () => {
       .expect(200)
       .expect('Content-Type', /json/)
 
-    expect(res.body).toHaveProperty('id', 51)
+    expect(res.body).toHaveProperty('id')
   })
   it('PATCH BOOKING: should return a booking with fake data', async () => {
     const newBooking = {
       guestName: 'fake',
-      orderDate: 'string',
-      checkin: 'string',
-      checkout: 'string',
+      orderDate: '2022-03-11',
+      checkin: '2022-03-12',
+      checkout: '2022-03-15',
       request: 'string',
-      roomType: 'string',
-      status: 'BookingStatus'
+      roomID: 2,
+      status: 'inprogress'
     }
     const res: Response = await request(app)
       .patch('/bookings/1')
@@ -145,17 +145,15 @@ describe('Rooms Endpoints', () => {
       .expect('Content-Type', /json/)
     expect(res.body).toHaveProperty('message', 'Not Found')
   })
-  it('CREATE ROOM : should return the room with id 101', async () => {
+  it('CREATE ROOM : should return the room with id', async () => {
     const newRoom = {
-      photos: ['asd', 'eee'],
-      roomType: 'newRoom',
-      roomNumber: '02',
+      roomType: 'Single Bed A -',
+      roomNumber: 2,
       description: 'string',
       offer: true,
       price: 100,
       discount: 23,
-      cancellation: 'string',
-      amenities: ['asd', 'asd']
+      cancellation: 'string'
     }
     const res: Response = await request(app)
       .post('/rooms')
@@ -163,19 +161,17 @@ describe('Rooms Endpoints', () => {
       .expect(200)
       .expect('Content-Type', /json/)
 
-    expect(res.body).toHaveProperty('id', 101)
+    expect(res.body).toHaveProperty('id')
   })
   it('PATCH ROOM: should return a room with fake roomType', async () => {
     const newRoom = {
-      photos: ['asd', 'eee'],
-      roomType: 'fake',
-      roomNumber: '02',
-      description: 'string',
+      roomType: 'Single Bed A -',
+      roomNumber: 2,
+      description: 'string fake',
       offer: true,
       price: 100,
       discount: 23,
-      cancellation: 'string',
-      amenities: ['asd', 'asd']
+      cancellation: 'string'
     }
     const res: Response = await request(app)
       .patch('/rooms/1')
@@ -183,7 +179,7 @@ describe('Rooms Endpoints', () => {
       .expect(200)
       .expect('Content-Type', /json/)
 
-    expect(res.body).toHaveProperty('roomType', 'fake')
+    expect(res.body).toHaveProperty('description', 'string fake')
   })
 })
 describe('Users Endpoints', () => {

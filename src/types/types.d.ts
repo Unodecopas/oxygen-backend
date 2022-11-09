@@ -20,14 +20,13 @@ export interface Booking {
   checkin: string
   checkout: string
   request: string
-  roomType: string
+  roomID: number
   status: BookingStatus
 }
 export type NewBooking = Omit<Booking, 'id'>
 
 export interface Room {
   id: number
-  photos: string[]
   roomType: string
   roomNumber: string
   description: string
@@ -35,7 +34,6 @@ export interface Room {
   price: number
   discount: number
   cancellation: string
-  amenities: string[]
 }
 export type NewRoom = Omit<Room, 'id'>
 

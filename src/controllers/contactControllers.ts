@@ -22,3 +22,11 @@ export const addContact = async (contact: NewContact): Promise<any> => {
   `, [[date, customer, email, phone, comment, subject, status]])
   return response
 }
+
+export const updateContact = async (contact: NewContact, id: number): Promise<any> => {
+  const { date, customer, email, phone, comment, subject, status } = contact
+  const response: OkPacket | any = await dbQuery(`
+    update contacts set ? where id = ?
+  `, [{ date, customer, email, phone, comment, subject, status }, id])
+  return response
+}
